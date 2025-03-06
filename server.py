@@ -15,9 +15,12 @@ def sent_analyzer():
     sadness_score = response['sadness']
     dominant = response['dominant_emotion']
 
-    return f"""For the given statement, the system response is 'anger': {anger_score}, 
-    'disgust': {disgust_score}, 'fear': {fear_score}, 'joy': {joy_score} and 'sadness': {sadness_score}. 
-    The dominant emotion is {dominant}."""
+    if dominant is None:
+        return "Invalid text! Please try again!"
+    else:
+        return f"""For the given statement, the system response is 'anger': {anger_score}, 
+        'disgust': {disgust_score}, 'fear': {fear_score}, 'joy': {joy_score} and 'sadness': {sadness_score}. 
+        The dominant emotion is {dominant}."""
 
 @app.route("/")
 def render_index_page():
@@ -25,5 +28,5 @@ def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
     
